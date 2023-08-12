@@ -6,7 +6,7 @@ export default function Nav() {
   };
 
   return (
-    <div className="flex gap-12 font-Libre text-xl font-bold flex-col p-4 justify-center bg-black">
+    <div className="flex flex-col gap-12 bg-black px-4 pt-[10rem] font-Libre text-xl font-bold">
       <NavLink to="/" className={getClass}>
         Dashboard
       </NavLink>

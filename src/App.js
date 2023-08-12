@@ -5,6 +5,7 @@ import RootLayout from "./pages/RootLayout";
 import Departments from "./pages/Departments";
 import Products from "./pages/Products";
 import Dashboard from "./pages/Dashboard";
+import NewProduct from "./pages/NewProduct";
 
 const router = createBrowserRouter([
   {
@@ -23,7 +24,10 @@ const router = createBrowserRouter([
         path: "/products",
         element: <Products />,
       },
-      {},
+      {
+        path: "/new",
+        element: <NewProduct />,
+      },
     ],
   },
 ]);

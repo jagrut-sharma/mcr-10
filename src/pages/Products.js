@@ -1,3 +1,84 @@
+import { Link } from "react-router-dom";
+import { useData } from "../context/dataContext";
+
 export default function Products() {
-  return <div>Products</div>;
+  const {
+    dataState: { inventoryData },
+  } = useData();
+
+  return (
+    <main className="px-4 py-8">
+      <div className="mr-2 flex items-center justify-between p-2">
+        <h2 className="text-3xl font-bold">Products</h2>
+
+        <select
+          name="department"
+          id="department"
+          className="rounded border-2 border-gray-700 px-[5px]"
+        >
+          <option value="All">All Departments</option>
+          <option value="Kitchen">Kitchen</option>
+          <option value="Clothing">Clothing</option>
+          <option value="Toys">Toys</option>
+        </select>
+
+        <div className="flex items-center gap-2">
+          <input type="checkbox" name="stock" id="low-stock" />
+          <label htmlFor="low-stock" className="text-lg">
+            Low Stock Item
+          </label>
+        </div>
+
+        <select
+          name="sort"
+          id="sort"
+          className="rounded border-2 border-gray-700 px-[5px]"
+        >
+          <option value="name">Name</option>
+          <option value="price">Price</option>
+          <option value="stock">Stock</option>
+        </select>
+
+        <Link
+          to={"/new"}
+          className="rounded-md bg-blue-600 px-3 py-1 text-base text-slate-200 hover:opacity-90"
+        >
+          New
+        </Link>
+      </div>
+
+      <div>
+        <table className="min-w-full">
+          <thead>
+            <tr className="border-b bg-gray-300">
+              <th className="px-4 py-2 text-center">Image</th>
+              <th className="px-4 py-2 text-center">Name</th>
+              <th className="px-4 py-2 text-center">Description</th>
+              <th className="px-4 py-2 text-center">Price</th>
+              <th className="px-4 py-2 text-center">Stock</th>
+              <th className="px-4 py-2 text-center">Supplier</th>
+            </tr>
+          </thead>
+          <tbody>
+            {inventoryData.map((product) => (
+              <tr key={product.id} className="border-b text-center">
+                <td className="px-4 py-2">
+                  <img
+                    src={product.imageUrl}
+                    alt={product.name}
+                    className="h-16"
+                  />
+                </td>
+                <td className="px-4 py-2">{product.name}</td>
+                <td className="px-4 py-2">{product.description}</td>
+                <td className="px-4 py-2">${product.price}</td>
+                <td className="px-4 py-2">{product.stock}</td>
+                <td className="px-4 py-2">{product.supplier}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </main>
+  );
 }

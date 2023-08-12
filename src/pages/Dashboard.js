@@ -7,39 +7,39 @@ export default function Dashboard() {
 
   const totalStock = inventoryData.reduce(
     (total, curr) => total + curr.stock,
-    0
+    0,
   );
   const totalDelivered = inventoryData.reduce(
     (total, curr) => total + curr.delivered,
-    0
+    0,
   );
 
   const lowStockItems = inventoryData.reduce(
     (items, curr) => (curr.stock <= 10 ? items + 1 : items),
-    0
+    0,
   );
 
   return (
-    <main className="px-8 py-12 flex justify-center gap-6 items-center">
-      <div className="flex flex-col items-center bg-slate-200 h-max p-4 rounded-lg gap-2">
-        <p className="text-2xl font-Libre font-bold text-green-600">
+    <main className="flex items-center justify-center gap-6 px-8 py-12">
+      <div className="flex h-max flex-col items-center gap-2 rounded-lg bg-slate-200 p-4">
+        <p className="font-Libre text-2xl font-bold text-green-600">
           {totalStock}
         </p>
-        <p className="font-bold font-Libre">Total Stock</p>
+        <p className="font-Libre font-bold">Total Stock</p>
       </div>
 
-      <div className="flex flex-col items-center bg-slate-200 h-max p-4 rounded-lg gap-2">
-        <p className="text-2xl font-Libre font-bold text-orange-400">
+      <div className="flex h-max flex-col items-center gap-2 rounded-lg bg-slate-200 p-4">
+        <p className="font-Libre text-2xl font-bold text-orange-400">
           {totalDelivered}
         </p>
-        <p className="font-bold font-Libre">Total Delivered</p>
+        <p className="font-Libre font-bold">Total Delivered</p>
       </div>
 
-      <div className="flex flex-col items-center bg-slate-200 h-max p-4 rounded-lg gap-2">
-        <p className="text-2xl font-Libre font-bold text-red-600">
+      <div className="flex h-max flex-col items-center gap-2 rounded-lg bg-slate-200 p-4">
+        <p className="font-Libre text-2xl font-bold text-red-600">
           {lowStockItems}
         </p>
-        <p className="font-bold font-Libre">Low Stock Items</p>
+        <p className="font-Libre font-bold">Low Stock Items</p>
       </div>
     </main>
   );

@@ -3,6 +3,7 @@ import { inventoryData } from "../utils/data";
 
 export const initialDataState = {
   inventoryData: [...inventoryData],
+  filters: {},
 };
 
 export const dataReducer = (draft, action) => {
