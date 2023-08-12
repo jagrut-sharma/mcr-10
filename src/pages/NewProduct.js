@@ -22,13 +22,13 @@ export default function NewProduct() {
   const handleAddProduct = () => {
     dataDispatch({
       type: ACTIONS.ADD_NEW_PRODUCT,
-      payload: { ...productData, id: inventoryData.length },
+      payload: { ...productData, id: inventoryData.length + 1, delivered: 0 },
     });
     localStorage.setItem(
       "inventory",
       JSON.stringify([
         ...inventoryData,
-        { ...productData, id: inventoryData.length + 1 },
+        { ...productData, id: inventoryData.length + 1, delivered: 0 },
       ]),
     );
     setProductData(initialProductFormData);

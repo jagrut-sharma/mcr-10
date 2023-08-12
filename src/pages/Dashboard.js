@@ -6,11 +6,11 @@ export default function Dashboard() {
   } = useData();
 
   const totalStock = inventoryData.reduce(
-    (total, curr) => total + curr.stock,
+    (total, curr) => total + Number(curr.stock),
     0,
   );
   const totalDelivered = inventoryData.reduce(
-    (total, curr) => total + curr.delivered,
+    (total, curr) => total + Number(curr.delivered),
     0,
   );
 

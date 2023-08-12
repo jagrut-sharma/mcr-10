@@ -3,10 +3,7 @@ import { useData } from "../context/dataContext";
 import { ACTIONS } from "../utils/ACTIONS";
 
 export default function Departments() {
-  const {
-    dataDispatch,
-    dataState: { filtersVal, inventoryData },
-  } = useData();
+  const { dataDispatch } = useData();
   const navigate = useNavigate();
 
   const handleClick = (value) => {
