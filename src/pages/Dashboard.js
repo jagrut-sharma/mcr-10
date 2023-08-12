@@ -13,6 +13,7 @@ export default function Dashboard() {
     (total, curr) => total + curr.delivered,
     0
   );
+
   const lowStockItems = inventoryData.reduce(
     (items, curr) => (curr.stock <= 10 ? items + 1 : items),
     0

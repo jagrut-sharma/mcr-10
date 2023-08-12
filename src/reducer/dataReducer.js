@@ -7,9 +7,11 @@ export const initialDataState = {
 
 export const dataReducer = (draft, action) => {
   switch (action.type) {
-    case ACTIONS.TEST:
+    case ACTIONS.INITIALIZE_DATA: {
+      draft.inventoryData = action.payload;
+      localStorage.setItem("inventory", JSON.stringify(action.payload));
       break;
-
+    }
     default:
       break;
   }

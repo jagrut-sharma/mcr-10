@@ -1,1 +1,3 @@
-export const ACTIONS = {};
+export const ACTIONS = {
+  INITIALIZE_DATA: "INITIALIZE INVENTORY",
+};
