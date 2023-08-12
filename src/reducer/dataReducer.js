@@ -13,6 +13,12 @@ export const dataReducer = (draft, action) => {
       localStorage.setItem("inventory", JSON.stringify(action.payload));
       break;
     }
+
+    case ACTIONS.ADD_NEW_PRODUCT: {
+      draft.inventoryData.push(action.payload);
+      break;
+    }
+
     default:
       break;
   }

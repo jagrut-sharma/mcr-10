@@ -1,4 +1,37 @@
+import { useImmer } from "use-immer";
+import { useData } from "../context/dataContext";
+import { ACTIONS } from "../utils/ACTIONS";
+import { initialProductFormData } from "../utils/constants";
+
 export default function NewProduct() {
+  const [productData, setProductData] = useImmer(initialProductFormData);
+
+  const {
+    dataState: { inventoryData },
+    dataDispatch,
+  } = useData();
+
+  const handleChange = (e) => {
+    setProductData((draft) => {
+      draft[e.target.name] = e.target.value;
+    });
+  };
+
+  const handleAddProduct = () => {
+    dataDispatch({
+      type: ACTIONS.ADD_NEW_PRODUCT,
+      payload: { ...productData, id: inventoryData.length },
+    });
+    localStorage.setItem(
+      "inventory",
+      JSON.stringify([
+        ...inventoryData,
+        { ...productData, id: inventoryData.length + 1 },
+      ]),
+    );
+    setProductData(initialProductFormData);
+  };
+
   return (
     <main className="p-8 font-Libre">
       <h1 className="text-3xl font-bold">Add New Product</h1>
@@ -10,6 +43,8 @@ export default function NewProduct() {
             name="department"
             id="department"
             className="w-[50%] rounded border-2 border-gray-700 px-[5px]"
+            value={productData.department}
+            onChange={handleChange}
           >
             <option value="select">Select Department</option>
             <option value="Kitchen">Kitchen</option>
@@ -25,6 +60,8 @@ export default function NewProduct() {
             className="w-[50%] rounded border-2 border-gray-700 px-[5px]"
             id="name"
             name="name"
+            value={productData.name}
+            onChange={handleChange}
           />
         </div>
 
@@ -34,8 +71,10 @@ export default function NewProduct() {
             name="description"
             id="description"
             cols="30"
-            rows="10"
+            rows="5"
             className="w-[50%] rounded border-2 border-gray-700 px-[5px]"
+            value={productData.description}
+            onChange={handleChange}
           ></textarea>
         </div>
 
@@ -47,7 +86,8 @@ export default function NewProduct() {
             id="price"
             name="price"
             min={0}
-            placeholder="0"
+            value={productData.price}
+            onChange={handleChange}
           />
         </div>
 
@@ -59,7 +99,8 @@ export default function NewProduct() {
             id="stock"
             name="stock"
             min={0}
-            placeholder="0"
+            value={productData.stock}
+            onChange={handleChange}
           />
         </div>
 
@@ -70,6 +111,8 @@ export default function NewProduct() {
             className="w-[50%] rounded border-2 border-gray-700 px-[5px]"
             id="sku"
             name="sku"
+            value={productData.sku}
+            onChange={handleChange}
           />
         </div>
 
@@ -80,6 +123,8 @@ export default function NewProduct() {
             className="w-[50%] rounded border-2 border-gray-700 px-[5px]"
             id="supplier"
             name="supplier"
+            value={productData.supplier}
+            onChange={handleChange}
           />
         </div>
 
@@ -90,10 +135,15 @@ export default function NewProduct() {
             className="w-[50%] rounded border-2 border-gray-700 px-[5px]"
             id="imageUrl"
             name="imageUrl"
+            value={productData.imageUrl}
+            onChange={handleChange}
           />
         </div>
 
-        <button className="mt-3 w-max rounded-md bg-blue-600 p-2 px-4 text-base text-slate-200 hover:opacity-90">
+        <button
+          className="mt-3 w-max rounded-md bg-blue-600 p-2 px-4 text-base text-slate-200 hover:opacity-90"
+          onClick={handleAddProduct}
+        >
           Add Product
         </button>
       </div>
