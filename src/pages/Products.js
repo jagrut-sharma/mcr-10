@@ -94,7 +94,9 @@ export default function Products() {
                     className="h-16"
                   />
                 </td>
-                <td className="px-4 py-2">{product.name}</td>
+                <td className="px-4 py-2">
+                  <Link to={`/products/${product.id}`}>{product.name}</Link>
+                </td>
                 <td className="px-4 py-2">{product.description}</td>
                 <td className="px-4 py-2">${product.price}</td>
                 <td className="px-4 py-2">{product.stock}</td>

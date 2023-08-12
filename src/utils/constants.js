@@ -1,5 +1,3 @@
-import { inventoryData } from "./data";
-
 export const initialProductFormData = {
   department: "select",
   name: "",

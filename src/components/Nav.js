@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function Nav() {
   const getClass = ({ isActive }) => {
@@ -13,7 +13,7 @@ export default function Nav() {
       <NavLink to={"/departments"} className={getClass}>
         Departments
       </NavLink>
-      <NavLink to={"/products"} className={getClass}>
+      <NavLink to={"/products"} className={getClass} end>
         Products
       </NavLink>
     </div>

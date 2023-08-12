@@ -6,6 +6,8 @@ import Departments from "./pages/Departments";
 import Products from "./pages/Products";
 import Dashboard from "./pages/Dashboard";
 import NewProduct from "./pages/NewProduct";
+import ProductRootLayout from "./pages/ProductRootLayout";
+import SingleProductPage from "./pages/SingleProductPage";
 
 const router = createBrowserRouter([
   {
@@ -22,7 +24,17 @@ const router = createBrowserRouter([
       },
       {
         path: "/products",
-        element: <Products />,
+        element: <ProductRootLayout />,
+        children: [
+          {
+            index: true,
+            element: <Products />,
+          },
+          {
+            path: ":productID",
+            element: <SingleProductPage />,
+          },
+        ],
       },
       {
         path: "/new",
