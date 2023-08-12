@@ -1,10 +1,25 @@
 import { Link } from "react-router-dom";
 import { useData } from "../context/dataContext";
+import { ACTIONS } from "../utils/ACTIONS";
+import { getFilteredList } from "../utils/constants";
 
 export default function Products() {
   const {
-    dataState: { inventoryData },
+    dataState: { inventoryData, filtersVal },
+    dataDispatch,
   } = useData();
+
+  const handleChange = (e) => {
+    dataDispatch({
+      type: ACTIONS.APPLY_FILTER,
+      payload: {
+        category: e.target.name,
+        value: e.target.name === "lowStock" ? e.target.checked : e.target.value,
+      },
+    });
+  };
+
+  const filteredList = getFilteredList(inventoryData, filtersVal);
 
   return (
     <main className="px-4 py-8">
@@ -15,16 +30,24 @@ export default function Products() {
           name="department"
           id="department"
           className="rounded border-2 border-gray-700 px-[5px]"
+          value={filtersVal.department}
+          onChange={handleChange}
         >
-          <option value="All">All Departments</option>
+          <option value="all">All Departments</option>
           <option value="Kitchen">Kitchen</option>
           <option value="Clothing">Clothing</option>
           <option value="Toys">Toys</option>
         </select>
 
         <div className="flex items-center gap-2">
-          <input type="checkbox" name="stock" id="low-stock" />
-          <label htmlFor="low-stock" className="text-lg">
+          <input
+            type="checkbox"
+            name="lowStock"
+            id="lowStock"
+            onChange={handleChange}
+            checked={filtersVal.lowStock}
+          />
+          <label htmlFor="lowStock" className="text-lg">
             Low Stock Item
           </label>
         </div>
@@ -33,6 +56,8 @@ export default function Products() {
           name="sort"
           id="sort"
           className="rounded border-2 border-gray-700 px-[5px]"
+          value={filtersVal.sort}
+          onChange={handleChange}
         >
           <option value="name">Name</option>
           <option value="price">Price</option>
@@ -60,7 +85,7 @@ export default function Products() {
             </tr>
           </thead>
           <tbody>
-            {inventoryData.map((product) => (
+            {filteredList.map((product) => (
               <tr key={product.id} className="border-b text-center">
                 <td className="px-4 py-2">
                   <img

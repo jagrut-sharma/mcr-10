@@ -2,9 +2,11 @@ import { useImmer } from "use-immer";
 import { useData } from "../context/dataContext";
 import { ACTIONS } from "../utils/ACTIONS";
 import { initialProductFormData } from "../utils/constants";
+import { useNavigate } from "react-router-dom";
 
 export default function NewProduct() {
   const [productData, setProductData] = useImmer(initialProductFormData);
+  const navigate = useNavigate();
 
   const {
     dataState: { inventoryData },
@@ -30,6 +32,7 @@ export default function NewProduct() {
       ]),
     );
     setProductData(initialProductFormData);
+    navigate("/products");
   };
 
   return (
