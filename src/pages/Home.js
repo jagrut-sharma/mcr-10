@@ -3,9 +3,9 @@ import { useData } from "../context/dataContext";
 
 export default function Home() {
   return (
-    <>
+    <div>
       <h1 className="text-3xl font-bold font-Merriweather">Heading</h1>
       <p className="text-xl font-Libre">Paragraph</p>
-    </>
+    </div>
   );
 }

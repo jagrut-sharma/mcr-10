@@ -2,7 +2,10 @@ import { createContext, useContext } from "react";
 import { useImmerReducer } from "use-immer";
 import { dataReducer, initialDataState } from "../reducer/dataReducer";
 
-const DataContext = createContext({});
+const DataContext = createContext({
+  dataState: {},
+  dataDispatch: () => {},
+});
 
 export const DataProvider = ({ children }) => {
   const [dataState, dataDispatch] = useImmerReducer(
